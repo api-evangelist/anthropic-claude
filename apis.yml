@@ -1,0 +1,172 @@
+aid: anthropic-claude
+name: Anthropic Claude
+description: >-
+  Anthropic Claude is a family of frontier large language models (Opus, Sonnet,
+  Haiku) accessible via the Anthropic API for building AI assistants, agents,
+  and integrations. The API supports streaming chat completions, tool use,
+  vision, prompt caching, batch processing, the Files API, computer use, and the
+  Model Context Protocol, with authentication via x-api-key headers and a base
+  URL at api.anthropic.com.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Artificial Intelligence
+  - Large Language Models
+  - LLM
+  - Generative AI
+  - Chat
+  - Agents
+  - Claude
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/anthropic-claude/refs/heads/main/apis.yml
+created: '2026-05-11'
+modified: '2026-05-11'
+specificationVersion: '0.19'
+apis:
+  - aid: anthropic-claude:messages-api
+    name: Anthropic Claude Messages API
+    description: >-
+      REST API for sending messages to Claude models with support for streaming,
+      tool use, vision, system prompts, prompt caching, and extended thinking.
+      Authentication uses an x-api-key header with an anthropic-version header.
+    humanURL: https://docs.anthropic.com/en/api/messages
+    baseURL: https://api.anthropic.com
+    tags:
+      - Messages
+      - Chat
+      - Completions
+      - Tool Use
+      - Vision
+      - Streaming
+    properties:
+      - type: Documentation
+        url: https://docs.anthropic.com/en/api/messages
+      - type: API Reference
+        url: https://docs.anthropic.com/en/api/getting-started
+      - type: OpenAPI
+        url: openapi/anthropic-claude-openapi.yml
+      - type: Getting Started
+        url: https://docs.anthropic.com/en/api/getting-started
+common:
+  - type: Website
+    url: https://www.anthropic.com
+  - type: Documentation
+    url: https://docs.anthropic.com
+  - type: API Reference
+    url: https://docs.anthropic.com/en/api/getting-started
+  - type: Console
+    url: https://console.anthropic.com
+  - type: Sign Up
+    url: https://console.anthropic.com/login
+  - type: Pricing
+    url: https://www.anthropic.com/pricing
+  - type: Models
+    url: https://docs.anthropic.com/en/docs/about-claude/models
+  - type: Authentication
+    url: https://docs.anthropic.com/en/api/getting-started
+  - type: Rate Limits
+    url: https://docs.anthropic.com/en/api/rate-limits
+  - type: Errors
+    url: https://docs.anthropic.com/en/api/errors
+  - type: Versioning
+    url: https://docs.anthropic.com/en/api/versioning
+  - type: Status
+    url: https://status.anthropic.com
+  - type: Support
+    url: https://support.anthropic.com
+  - type: Privacy Policy
+    url: https://www.anthropic.com/legal/privacy
+  - type: Terms of Service
+    url: https://www.anthropic.com/legal/commercial-terms
+  - type: GitHub Organization
+    url: https://github.com/anthropics
+  - type: Python SDK
+    url: https://github.com/anthropics/anthropic-sdk-python
+  - type: TypeScript SDK
+    url: https://github.com/anthropics/anthropic-sdk-typescript
+  - type: Cookbook
+    url: https://github.com/anthropics/anthropic-cookbook
+  - type: Claude Code
+    url: https://www.anthropic.com/claude-code
+  - type: Model Context Protocol
+    url: https://modelcontextprotocol.io
+  - type: Blog
+    url: https://www.anthropic.com/news
+  - type: X (Twitter)
+    url: https://x.com/AnthropicAI
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/anthropicresearch
+  - type: YouTube
+    url: https://www.youtube.com/@anthropic-ai
+features:
+  - name: Frontier Models
+    description: >-
+      Access to Claude Opus, Sonnet, and Haiku families of large language models
+      with industry-leading reasoning, coding, and agentic capabilities.
+  - name: Tool Use
+    description: >-
+      Define custom tools that Claude can invoke during conversations to call
+      external APIs, query databases, or execute code.
+  - name: Vision
+    description: >-
+      Multi-modal input supports images alongside text for analysis, OCR,
+      diagrams, and document understanding.
+  - name: Prompt Caching
+    description: >-
+      Cache large prompts (system instructions, documents, examples) to reduce
+      cost and latency on subsequent requests.
+  - name: Streaming
+    description: >-
+      Server-sent events stream responses token-by-token for low-latency
+      interactive experiences.
+  - name: Batch API
+    description: >-
+      Submit large batches of asynchronous requests at 50 percent discount with
+      results delivered within 24 hours.
+  - name: Files API
+    description: >-
+      Upload and reference files for use across Messages, batches, and
+      computer-use sessions.
+  - name: Computer Use
+    description: >-
+      Allow Claude to control a virtual computer (screenshots, mouse, keyboard)
+      to complete multi-step tasks autonomously.
+  - name: Extended Thinking
+    description: >-
+      Enable extended reasoning steps for harder problems with transparent
+      thinking traces.
+useCases:
+  - name: AI Assistants and Chatbots
+    description: >-
+      Build conversational assistants for customer support, productivity, and
+      knowledge work powered by Claude models.
+  - name: Coding Agents
+    description: >-
+      Power software engineering agents that read, edit, run, and test code
+      across large repositories.
+  - name: Document Processing
+    description: >-
+      Extract, summarize, and analyze long documents using large context windows
+      and vision capabilities.
+  - name: Content Generation
+    description: >-
+      Generate marketing copy, technical writing, translations, and creative
+      content at scale.
+  - name: Agentic Workflows
+    description: >-
+      Orchestrate multi-step agent workflows using tool use, MCP servers, and
+      computer use for end-to-end task automation.
+integrations:
+  - name: Amazon Bedrock
+    description: Access Claude models via the AWS Bedrock API
+  - name: Google Cloud Vertex AI
+    description: Access Claude models via Google Cloud Vertex AI
+  - name: Model Context Protocol
+    description: Open protocol for connecting Claude to external tools and data sources
+  - name: LangChain
+    description: First-class LangChain integration for chains and agents
+  - name: LlamaIndex
+    description: Use Claude as the LLM for RAG and indexing workflows
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
