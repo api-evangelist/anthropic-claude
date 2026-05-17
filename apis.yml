@@ -41,22 +41,22 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.anthropic.com/en/api/messages
-      - type: API Reference
+      - type: APIReference
         url: https://docs.anthropic.com/en/api/getting-started
       - type: OpenAPI
         url: openapi/anthropic-claude-openapi.yml
-      - type: Getting Started
+      - type: GettingStarted
         url: https://docs.anthropic.com/en/api/getting-started
 common:
   - type: Website
     url: https://www.anthropic.com
   - type: Documentation
     url: https://docs.anthropic.com
-  - type: API Reference
+  - type: APIReference
     url: https://docs.anthropic.com/en/api/getting-started
   - type: Console
     url: https://console.anthropic.com
-  - type: Sign Up
+  - type: SignUp
     url: https://console.anthropic.com/login
   - type: Pricing
     url: https://www.anthropic.com/pricing
@@ -64,21 +64,21 @@ common:
     url: https://docs.anthropic.com/en/docs/about-claude/models
   - type: Authentication
     url: https://docs.anthropic.com/en/api/getting-started
-  - type: Rate Limits
+  - type: RateLimits
     url: https://docs.anthropic.com/en/api/rate-limits
   - type: Errors
     url: https://docs.anthropic.com/en/api/errors
   - type: Versioning
     url: https://docs.anthropic.com/en/api/versioning
-  - type: Status
+  - type: StatusPage
     url: https://status.anthropic.com
   - type: Support
     url: https://support.anthropic.com
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.anthropic.com/legal/privacy
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.anthropic.com/legal/commercial-terms
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/anthropics
   - type: Python SDK
     url: https://github.com/anthropics/anthropic-sdk-python
