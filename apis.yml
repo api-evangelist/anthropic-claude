@@ -20,7 +20,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/anthropic-claude/refs/heads/main/apis.yml
 created: '2026-05-11'
-modified: '2026-05-11'
+modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
   - aid: anthropic-claude:messages-api
@@ -98,6 +98,9 @@ common:
     url: https://www.linkedin.com/company/anthropicresearch
   - type: YouTube
     url: https://www.youtube.com/@anthropic-ai
+  - name: MCP Server
+    url: https://github.com/anthropics/claude-ai-mcp
+    type: MCPServer
 features:
   - name: Frontier Models
     description: >-
