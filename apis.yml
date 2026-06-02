@@ -20,7 +20,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/anthropic-claude/refs/heads/main/apis.yml
 created: '2026-05-11'
-modified: '2026-05-19'
+modified: '2026-05-29'
 specificationVersion: '0.19'
 apis:
   - aid: anthropic-claude:messages-api
@@ -45,6 +45,8 @@ apis:
         url: https://docs.anthropic.com/en/api/getting-started
       - type: OpenAPI
         url: openapi/anthropic-claude-openapi.yml
+      - type: AsyncAPI
+        url: asyncapi/anthropic-claude-asyncapi.yml
       - type: GettingStarted
         url: https://docs.anthropic.com/en/api/getting-started
 common:

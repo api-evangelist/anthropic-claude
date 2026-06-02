@@ -1,0 +1,656 @@
+asyncapi: 2.6.0
+id: urn:com:anthropic:claude:messages:streaming
+info:
+  title: Anthropic Claude Messages Streaming API
+  version: '2023-06-01'
+  description: |
+    AsyncAPI specification modeling the Server-Sent Events (SSE) stream produced by
+    Anthropic's Claude Messages API when `"stream": true` is set on a POST to
+    `/v1/messages`.
+
+    Transport: HTTP/1.1 with `Content-Type: text/event-stream` (Server-Sent Events).
+    The client opens a long-lived HTTP POST and the server pushes a sequence of
+    named SSE events. Each event has an SSE event name (e.g. `event: message_stop`)
+    and a `data:` line containing a JSON object whose `type` field matches the
+    event name.
+
+    Event flow per stream:
+      1. `message_start` — opens the stream with a Message object (empty content).
+      2. For each content block: `content_block_start`, one or more
+         `content_block_delta` events, then `content_block_stop`.
+      3. One or more `message_delta` events with top-level Message updates
+         (cumulative token usage in `usage`).
+      4. A final `message_stop` event.
+
+    `ping` events may appear at any point. `error` events may appear during
+    periods of high load or other failure conditions.
+
+    `content_block_delta` carries a `delta` whose `type` is one of:
+      - `text_delta` — incremental text for text content blocks
+      - `input_json_delta` — partial JSON string for `tool_use` / `server_tool_use`
+      - `thinking_delta` — incremental thinking content for extended-thinking blocks
+      - `signature_delta` — final signature for a thinking block (sent just before
+        `content_block_stop`)
+
+    This specification is derived verbatim from the public Anthropic documentation
+    at https://docs.anthropic.com/en/api/messages-streaming (currently served from
+    https://platform.claude.com/docs/en/api/messages-streaming).
+  contact:
+    name: Anthropic Developer Support
+    url: https://docs.anthropic.com/en/api/getting-help
+  license:
+    name: Anthropic Commercial Terms of Service
+    url: https://www.anthropic.com/legal/commercial-terms
+  termsOfService: https://www.anthropic.com/legal/aup
+defaultContentType: text/event-stream
+servers:
+  production:
+    url: api.anthropic.com/v1
+    protocol: https
+    description: |
+      Anthropic public REST + SSE base URL. Streaming responses are delivered
+      over HTTP/1.1 with `Content-Type: text/event-stream` (HTTP+SSE transport).
+      Standard request headers apply: `x-api-key`, `anthropic-version`,
+      `content-type: application/json`.
+    bindings:
+      http:
+        bindingVersion: '0.3.0'
+channels:
+  /messages:
+    description: |
+      Server-Sent Events stream returned by `POST https://api.anthropic.com/v1/messages`
+      when the request body includes `"stream": true`. Each SSE frame's event name
+      maps to one of the messages defined below; the JSON payload after `data:`
+      carries the matching schema.
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+    subscribe:
+      operationId: subscribeMessagesStream
+      summary: Receive Anthropic Claude Messages streaming events over HTTP+SSE
+      description: |
+        After issuing `POST /v1/messages` with `stream: true`, the client reads
+        an unbounded sequence of SSE events from the same HTTP response body
+        until `message_stop` (or `error`) is received and the server closes
+        the connection.
+      bindings:
+        http:
+          bindingVersion: '0.3.0'
+      message:
+        oneOf:
+          - $ref: '#/components/messages/MessageStart'
+          - $ref: '#/components/messages/ContentBlockStart'
+          - $ref: '#/components/messages/ContentBlockDelta'
+          - $ref: '#/components/messages/ContentBlockStop'
+          - $ref: '#/components/messages/MessageDelta'
+          - $ref: '#/components/messages/MessageStop'
+          - $ref: '#/components/messages/Ping'
+          - $ref: '#/components/messages/Error'
+components:
+  messages:
+    MessageStart:
+      name: message_start
+      title: message_start
+      summary: Opens a streamed response with a Message object whose content array is empty.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/MessageStartEvent'
+      examples:
+        - name: basicMessageStart
+          summary: message_start event from the Basic streaming request example
+          payload:
+            type: message_start
+            message:
+              id: msg_1nZdL29xx5MUA1yADyHTEsnR8uuvGzszyY
+              type: message
+              role: assistant
+              content: []
+              model: claude-opus-4-8
+              stop_reason: null
+              stop_sequence: null
+              usage:
+                input_tokens: 25
+                output_tokens: 1
+    ContentBlockStart:
+      name: content_block_start
+      title: content_block_start
+      summary: Marks the start of a content block at a given index in the final Message.content array.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ContentBlockStartEvent'
+      examples:
+        - name: textBlockStart
+          payload:
+            type: content_block_start
+            index: 0
+            content_block:
+              type: text
+              text: ''
+        - name: toolUseBlockStart
+          payload:
+            type: content_block_start
+            index: 1
+            content_block:
+              type: tool_use
+              id: toolu_01T1x1fJ34qAmk2tNTrN7Up6
+              name: get_weather
+              input: {}
+        - name: thinkingBlockStart
+          payload:
+            type: content_block_start
+            index: 0
+            content_block:
+              type: thinking
+              thinking: ''
+              signature: ''
+        - name: serverToolUseBlockStart
+          payload:
+            type: content_block_start
+            index: 1
+            content_block:
+              type: server_tool_use
+              id: srvtoolu_014hJH82Qum7Td6UV8gDXThB
+              name: web_search
+              input: {}
+    ContentBlockDelta:
+      name: content_block_delta
+      title: content_block_delta
+      summary: Carries a partial update for the content block at the specified index.
+      description: |
+        The shape of `delta` is determined by `delta.type`:
+          - `text_delta`        — `delta.text` (string fragment)
+          - `input_json_delta`  — `delta.partial_json` (partial JSON string)
+          - `thinking_delta`    — `delta.thinking` (string fragment)
+          - `signature_delta`   — `delta.signature` (final signature string)
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ContentBlockDeltaEvent'
+      examples:
+        - name: textDelta
+          summary: Text delta example from the docs
+          payload:
+            type: content_block_delta
+            index: 0
+            delta:
+              type: text_delta
+              text: ello frien
+        - name: inputJsonDelta
+          summary: Input JSON delta example from the docs
+          payload:
+            type: content_block_delta
+            index: 1
+            delta:
+              type: input_json_delta
+              partial_json: '{"location": "San Fra'
+        - name: thinkingDelta
+          summary: Thinking delta example from the docs
+          payload:
+            type: content_block_delta
+            index: 0
+            delta:
+              type: thinking_delta
+              thinking: |-
+                I need to find the GCD of 1071 and 462 using the Euclidean algorithm.
+
+                1071 = 2 × 462 + 147
+        - name: signatureDelta
+          summary: Signature delta example from the docs
+          payload:
+            type: content_block_delta
+            index: 0
+            delta:
+              type: signature_delta
+              signature: EqQBCgIYAhIM1gbcDa9GJwZA2b3hGgxBdjrkzLoky3dl1pkiMOYds...
+    ContentBlockStop:
+      name: content_block_stop
+      title: content_block_stop
+      summary: Marks the end of the content block at the given index.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ContentBlockStopEvent'
+      examples:
+        - name: contentBlockStop
+          payload:
+            type: content_block_stop
+            index: 0
+    MessageDelta:
+      name: message_delta
+      title: message_delta
+      summary: Top-level updates to the final Message (stop reason, sequence) plus cumulative usage.
+      description: |
+        The token counts shown in the `usage` field of `message_delta` events are
+        cumulative across the stream.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/MessageDeltaEvent'
+      examples:
+        - name: basicMessageDelta
+          payload:
+            type: message_delta
+            delta:
+              stop_reason: end_turn
+              stop_sequence: null
+            usage:
+              output_tokens: 15
+        - name: toolUseMessageDelta
+          payload:
+            type: message_delta
+            delta:
+              stop_reason: tool_use
+              stop_sequence: null
+            usage:
+              output_tokens: 89
+        - name: webSearchMessageDelta
+          payload:
+            type: message_delta
+            delta:
+              stop_reason: end_turn
+              stop_sequence: null
+            usage:
+              input_tokens: 10682
+              cache_creation_input_tokens: 0
+              cache_read_input_tokens: 0
+              output_tokens: 510
+              server_tool_use:
+                web_search_requests: 1
+    MessageStop:
+      name: message_stop
+      title: message_stop
+      summary: Final event on the stream; the connection is closed afterward.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/MessageStopEvent'
+      examples:
+        - name: messageStop
+          payload:
+            type: message_stop
+    Ping:
+      name: ping
+      title: ping
+      summary: Keep-alive event; may appear any number of times during the stream.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PingEvent'
+      examples:
+        - name: ping
+          payload:
+            type: ping
+    Error:
+      name: error
+      title: error
+      summary: Error event emitted in the stream (e.g. overloaded_error during high load).
+      description: |
+        Errors that would normally surface as an HTTP error in non-streaming mode
+        are emitted as `error` SSE events while the stream is open. The `error.type`
+        field uses the same identifiers as the standard Anthropic Errors API
+        (see https://docs.anthropic.com/en/api/errors).
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ErrorEvent'
+      examples:
+        - name: overloadedError
+          summary: Example error from the docs
+          payload:
+            type: error
+            error:
+              type: overloaded_error
+              message: Overloaded
+  schemas:
+    MessageStartEvent:
+      type: object
+      required:
+        - type
+        - message
+      properties:
+        type:
+          type: string
+          const: message_start
+          enum: [message_start]
+        message:
+          $ref: '#/components/schemas/Message'
+    ContentBlockStartEvent:
+      type: object
+      required:
+        - type
+        - index
+        - content_block
+      properties:
+        type:
+          type: string
+          const: content_block_start
+          enum: [content_block_start]
+        index:
+          type: integer
+          minimum: 0
+          description: Index of this content block in the final Message.content array.
+        content_block:
+          $ref: '#/components/schemas/ContentBlock'
+    ContentBlockDeltaEvent:
+      type: object
+      required:
+        - type
+        - index
+        - delta
+      properties:
+        type:
+          type: string
+          const: content_block_delta
+          enum: [content_block_delta]
+        index:
+          type: integer
+          minimum: 0
+        delta:
+          oneOf:
+            - $ref: '#/components/schemas/TextDelta'
+            - $ref: '#/components/schemas/InputJsonDelta'
+            - $ref: '#/components/schemas/ThinkingDelta'
+            - $ref: '#/components/schemas/SignatureDelta'
+          discriminator:
+            propertyName: type
+    ContentBlockStopEvent:
+      type: object
+      required:
+        - type
+        - index
+      properties:
+        type:
+          type: string
+          const: content_block_stop
+          enum: [content_block_stop]
+        index:
+          type: integer
+          minimum: 0
+    MessageDeltaEvent:
+      type: object
+      required:
+        - type
+        - delta
+      properties:
+        type:
+          type: string
+          const: message_delta
+          enum: [message_delta]
+        delta:
+          type: object
+          description: Top-level Message fields that changed.
+          properties:
+            stop_reason:
+              type: [string, 'null']
+              enum: [end_turn, max_tokens, stop_sequence, tool_use, pause_turn, refusal, null]
+              description: Reason the model stopped generating. May be null mid-stream.
+            stop_sequence:
+              type: [string, 'null']
+        usage:
+          $ref: '#/components/schemas/StreamingUsage'
+    MessageStopEvent:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: message_stop
+          enum: [message_stop]
+    PingEvent:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: ping
+          enum: [ping]
+    ErrorEvent:
+      type: object
+      required:
+        - type
+        - error
+      properties:
+        type:
+          type: string
+          const: error
+          enum: [error]
+        error:
+          type: object
+          required:
+            - type
+            - message
+          properties:
+            type:
+              type: string
+              description: Anthropic error type identifier (e.g. overloaded_error).
+              examples:
+                - overloaded_error
+                - invalid_request_error
+                - authentication_error
+                - permission_error
+                - not_found_error
+                - request_too_large
+                - rate_limit_error
+                - api_error
+            message:
+              type: string
+              description: Human-readable error message.
+
+    TextDelta:
+      type: object
+      description: Incremental text appended to a `text` content block.
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          const: text_delta
+          enum: [text_delta]
+        text:
+          type: string
+    InputJsonDelta:
+      type: object
+      description: |
+        Partial JSON string update for the `input` field of a `tool_use` or
+        `server_tool_use` content block. Concatenate `partial_json` chunks
+        across deltas to reconstruct the final JSON object on
+        `content_block_stop`.
+      required:
+        - type
+        - partial_json
+      properties:
+        type:
+          type: string
+          const: input_json_delta
+          enum: [input_json_delta]
+        partial_json:
+          type: string
+          description: A partial JSON string fragment.
+    ThinkingDelta:
+      type: object
+      description: Incremental thinking content for an extended-thinking block.
+      required:
+        - type
+        - thinking
+      properties:
+        type:
+          type: string
+          const: thinking_delta
+          enum: [thinking_delta]
+        thinking:
+          type: string
+    SignatureDelta:
+      type: object
+      description: |
+        Final signature for a `thinking` content block. Emitted exactly once,
+        immediately before the block's `content_block_stop`. Used to verify
+        the integrity of the thinking block.
+      required:
+        - type
+        - signature
+      properties:
+        type:
+          type: string
+          const: signature_delta
+          enum: [signature_delta]
+        signature:
+          type: string
+
+    Message:
+      type: object
+      description: Anthropic Message object (as emitted at stream open with empty content).
+      required:
+        - id
+        - type
+        - role
+        - content
+        - model
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          const: message
+          enum: [message]
+        role:
+          type: string
+          const: assistant
+          enum: [assistant]
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentBlock'
+        model:
+          type: string
+        stop_reason:
+          type: [string, 'null']
+          enum: [end_turn, max_tokens, stop_sequence, tool_use, pause_turn, refusal, null]
+        stop_sequence:
+          type: [string, 'null']
+        usage:
+          $ref: '#/components/schemas/StreamingUsage'
+    ContentBlock:
+      oneOf:
+        - $ref: '#/components/schemas/TextBlock'
+        - $ref: '#/components/schemas/ToolUseBlock'
+        - $ref: '#/components/schemas/ServerToolUseBlock'
+        - $ref: '#/components/schemas/ThinkingBlock'
+        - $ref: '#/components/schemas/WebSearchToolResultBlock'
+      discriminator:
+        propertyName: type
+    TextBlock:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          const: text
+          enum: [text]
+        text:
+          type: string
+    ToolUseBlock:
+      type: object
+      required:
+        - type
+        - id
+        - name
+        - input
+      properties:
+        type:
+          type: string
+          const: tool_use
+          enum: [tool_use]
+        id:
+          type: string
+        name:
+          type: string
+        input:
+          type: object
+          description: Tool input object. Starts empty; the final value is the JSON object
+            reconstructed by concatenating `input_json_delta.partial_json` chunks.
+    ServerToolUseBlock:
+      type: object
+      required:
+        - type
+        - id
+        - name
+        - input
+      properties:
+        type:
+          type: string
+          const: server_tool_use
+          enum: [server_tool_use]
+        id:
+          type: string
+        name:
+          type: string
+        input:
+          type: object
+    ThinkingBlock:
+      type: object
+      required:
+        - type
+        - thinking
+        - signature
+      properties:
+        type:
+          type: string
+          const: thinking
+          enum: [thinking]
+        thinking:
+          type: string
+        signature:
+          type: string
+    WebSearchToolResultBlock:
+      type: object
+      required:
+        - type
+        - tool_use_id
+        - content
+      properties:
+        type:
+          type: string
+          const: web_search_tool_result
+          enum: [web_search_tool_result]
+        tool_use_id:
+          type: string
+        content:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              title:
+                type: string
+              url:
+                type: string
+              encrypted_content:
+                type: string
+              page_age:
+                type: [string, 'null']
+    StreamingUsage:
+      type: object
+      description: |
+        Token usage object. Counts reported on `message_delta` events are
+        cumulative across the stream.
+      properties:
+        input_tokens:
+          type: integer
+          minimum: 0
+        output_tokens:
+          type: integer
+          minimum: 0
+        cache_creation_input_tokens:
+          type: integer
+          minimum: 0
+        cache_read_input_tokens:
+          type: integer
+          minimum: 0
+        server_tool_use:
+          type: object
+          properties:
+            web_search_requests:
+              type: integer
+              minimum: 0
