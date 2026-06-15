@@ -1,0 +1,1340 @@
+{
+  "item": [
+    {
+      "id": "551e4659-0d91-4f93-83f2-28db4846ea72",
+      "name": "Messages",
+      "description": {
+        "content": "Create messages with Claude models.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2d57477c-7b80-4dad-a81f-845a2763cb3a",
+          "name": "Create a Message",
+          "request": {
+            "name": "Create a Message",
+            "description": {
+              "content": "Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version, e.g. `2023-06-01`.",
+                "key": "anthropic-version",
+                "value": "2023-06-01"
+              },
+              {
+                "disabled": false,
+                "description": "Optional comma-separated list of beta feature flags.",
+                "key": "anthropic-beta",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"max_tokens\": \"<integer>\",\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"system\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"top_p\": \"<number>\",\n  \"top_k\": \"<integer>\",\n  \"stop_sequences\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stream\": false,\n  \"tools\": [\n    {\n      \"name\": \"<string>\",\n      \"input_schema\": \"<object>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"input_schema\": \"<object>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"tool_choice\": \"<object>\",\n  \"thinking\": {\n    \"type\": \"<string>\",\n    \"budget_tokens\": \"<integer>\"\n  },\n  \"service_tier\": \"<string>\",\n  \"metadata\": {\n    \"user_id\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c9862271-ffe5-4544-b372-759fad14e5d5",
+              "name": "A Message object (or a stream of server-sent events if `stream: true`).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional comma-separated list of beta feature flags.",
+                    "key": "anthropic-beta",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"max_tokens\": \"<integer>\",\n  \"messages\": [\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\"\n    },\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\"\n    }\n  ],\n  \"system\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"top_p\": \"<number>\",\n  \"top_k\": \"<integer>\",\n  \"stop_sequences\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stream\": false,\n  \"tools\": [\n    {\n      \"name\": \"string\",\n      \"input_schema\": {},\n      \"description\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"input_schema\": {},\n      \"description\": \"string\"\n    }\n  ],\n  \"tool_choice\": \"<object>\",\n  \"thinking\": {\n    \"type\": \"<string>\",\n    \"budget_tokens\": \"<integer>\"\n  },\n  \"service_tier\": \"<string>\",\n  \"metadata\": {\n    \"user_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"type\": \"message\",\n  \"role\": \"assistant\",\n  \"model\": \"string\",\n  \"stop_reason\": \"refusal\",\n  \"stop_sequence\": \"string\",\n  \"usage\": {\n    \"input_tokens\": 7883,\n    \"output_tokens\": 24,\n    \"cache_creation_input_tokens\": 7278,\n    \"cache_read_input_tokens\": 6074\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eeae9d7f-3cc6-4519-b352-dc319c9f9080",
+              "name": "An error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional comma-separated list of beta feature flags.",
+                    "key": "anthropic-beta",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"max_tokens\": \"<integer>\",\n  \"messages\": [\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\"\n    },\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\"\n    }\n  ],\n  \"system\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"top_p\": \"<number>\",\n  \"top_k\": \"<integer>\",\n  \"stop_sequences\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stream\": false,\n  \"tools\": [\n    {\n      \"name\": \"string\",\n      \"input_schema\": {},\n      \"description\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"input_schema\": {},\n      \"description\": \"string\"\n    }\n  ],\n  \"tool_choice\": \"<object>\",\n  \"thinking\": {\n    \"type\": \"<string>\",\n    \"budget_tokens\": \"<integer>\"\n  },\n  \"service_tier\": \"<string>\",\n  \"metadata\": {\n    \"user_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b342299f-f5c5-4817-b29d-aeb1d574206f",
+              "name": "An error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional comma-separated list of beta feature flags.",
+                    "key": "anthropic-beta",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"max_tokens\": \"<integer>\",\n  \"messages\": [\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\"\n    },\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\"\n    }\n  ],\n  \"system\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"top_p\": \"<number>\",\n  \"top_k\": \"<integer>\",\n  \"stop_sequences\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stream\": false,\n  \"tools\": [\n    {\n      \"name\": \"string\",\n      \"input_schema\": {},\n      \"description\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"input_schema\": {},\n      \"description\": \"string\"\n    }\n  ],\n  \"tool_choice\": \"<object>\",\n  \"thinking\": {\n    \"type\": \"<string>\",\n    \"budget_tokens\": \"<integer>\"\n  },\n  \"service_tier\": \"<string>\",\n  \"metadata\": {\n    \"user_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e88c865c-719a-48e0-988d-e318ee10c524",
+              "name": "An error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional comma-separated list of beta feature flags.",
+                    "key": "anthropic-beta",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"max_tokens\": \"<integer>\",\n  \"messages\": [\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\"\n    },\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\"\n    }\n  ],\n  \"system\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"top_p\": \"<number>\",\n  \"top_k\": \"<integer>\",\n  \"stop_sequences\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stream\": false,\n  \"tools\": [\n    {\n      \"name\": \"string\",\n      \"input_schema\": {},\n      \"description\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"input_schema\": {},\n      \"description\": \"string\"\n    }\n  ],\n  \"tool_choice\": \"<object>\",\n  \"thinking\": {\n    \"type\": \"<string>\",\n    \"budget_tokens\": \"<integer>\"\n  },\n  \"service_tier\": \"<string>\",\n  \"metadata\": {\n    \"user_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "62cb4ea3-ae5c-4027-b514-e79f2137c7e3",
+      "name": "Models",
+      "description": {
+        "content": "List and inspect available Claude models.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4052c1c3-9086-4357-ba9e-eaad27d3b9d8",
+          "name": "List available models",
+          "request": {
+            "name": "List available models",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "before_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "after_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version, e.g. `2023-06-01`.",
+                "key": "anthropic-version",
+                "value": "2023-06-01"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "15dc538b-2882-4bb4-9aaa-67b0ee78d3ac",
+              "name": "A page of Model objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "before_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b30a849b-2317-497a-ad0f-04625d10de3a",
+          "name": "Get a model",
+          "request": {
+            "name": "Get a model",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "models",
+                ":model_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version, e.g. `2023-06-01`.",
+                "key": "anthropic-version",
+                "value": "2023-06-01"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1cceffe2-6692-4f15-b960-7b2f713cee9f",
+              "name": "A Model object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "4ad3e66e-b51c-4ea6-9486-f780a6323412",
+      "name": "Token Counting",
+      "description": {
+        "content": "Count tokens for a prospective Messages request.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aceb4bb6-1195-444c-aa5e-19ed32784a7f",
+          "name": "Count tokens for a Messages request",
+          "request": {
+            "name": "Count tokens for a Messages request",
+            "description": {
+              "content": "Count the number of input tokens that a Messages request would consume, without actually creating a Message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "messages",
+                "count_tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version, e.g. `2023-06-01`.",
+                "key": "anthropic-version",
+                "value": "2023-06-01"
+              },
+              {
+                "disabled": false,
+                "description": "Optional comma-separated list of beta feature flags.",
+                "key": "anthropic-beta",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"system\": \"<string>\",\n  \"tools\": [\n    {\n      \"name\": \"<string>\",\n      \"input_schema\": \"<object>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"input_schema\": \"<object>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "86f689f5-b91f-4a33-8c8e-7eca885fc351",
+              "name": "Token count response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages",
+                    "count_tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional comma-separated list of beta feature flags.",
+                    "key": "anthropic-beta",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"string\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"string\"\n    }\n  ],\n  \"system\": \"<string>\",\n  \"tools\": [\n    {\n      \"name\": \"string\",\n      \"input_schema\": {},\n      \"description\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"input_schema\": {},\n      \"description\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"input_tokens\": 8051,\n  \"cache_creation_input_tokens\": 3111,\n  \"cache_read_input_tokens\": 6334\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "210eabe1-69c7-4471-b0b8-e32688800ecf",
+              "name": "An error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages",
+                    "count_tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional comma-separated list of beta feature flags.",
+                    "key": "anthropic-beta",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"string\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"string\"\n    }\n  ],\n  \"system\": \"<string>\",\n  \"tools\": [\n    {\n      \"name\": \"string\",\n      \"input_schema\": {},\n      \"description\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"input_schema\": {},\n      \"description\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7c822cbe-71d0-46e1-923c-9855bd315b28",
+      "name": "Message Batches",
+      "description": {
+        "content": "Submit and manage asynchronous Message Batches.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7f04f605-1985-49ea-95cb-192bd9cc6290",
+          "name": "List Message Batches",
+          "request": {
+            "name": "List Message Batches",
+            "description": {
+              "content": "List Message Batches in the workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "messages",
+                "batches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "before_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "after_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version, e.g. `2023-06-01`.",
+                "key": "anthropic-version",
+                "value": "2023-06-01"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b13f5162-12ff-4e1a-aa92-7f1917ce39fc",
+              "name": "A page of Message Batch objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages",
+                    "batches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "before_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94be00a1-414e-41a4-b03c-b24b1b9538ba",
+          "name": "Create a Message Batch",
+          "request": {
+            "name": "Create a Message Batch",
+            "description": {
+              "content": "Submit a batch of Messages requests for asynchronous processing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "messages",
+                "batches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version, e.g. `2023-06-01`.",
+                "key": "anthropic-version",
+                "value": "2023-06-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requests\": [\n    {\n      \"custom_id\": \"<string>\",\n      \"params\": {\n        \"model\": \"<string>\",\n        \"max_tokens\": \"<integer>\",\n        \"messages\": [\n          {\n            \"role\": \"<string>\",\n            \"content\": \"<string>\"\n          },\n          {\n            \"role\": \"<string>\",\n            \"content\": \"<string>\"\n          }\n        ],\n        \"system\": \"<string>\",\n        \"temperature\": \"<number>\",\n        \"top_p\": \"<number>\",\n        \"top_k\": \"<integer>\",\n        \"stop_sequences\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"stream\": false,\n        \"tools\": [\n          {\n            \"name\": \"<string>\",\n            \"input_schema\": \"<object>\",\n            \"description\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"input_schema\": \"<object>\",\n            \"description\": \"<string>\"\n          }\n        ],\n        \"tool_choice\": \"<object>\",\n        \"thinking\": {\n          \"type\": \"<string>\",\n          \"budget_tokens\": \"<integer>\"\n        },\n        \"service_tier\": \"<string>\",\n        \"metadata\": {\n          \"user_id\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"custom_id\": \"<string>\",\n      \"params\": {\n        \"model\": \"<string>\",\n        \"max_tokens\": \"<integer>\",\n        \"messages\": [\n          {\n            \"role\": \"<string>\",\n            \"content\": \"<string>\"\n          },\n          {\n            \"role\": \"<string>\",\n            \"content\": \"<string>\"\n          }\n        ],\n        \"system\": \"<string>\",\n        \"temperature\": \"<number>\",\n        \"top_p\": \"<number>\",\n        \"top_k\": \"<integer>\",\n        \"stop_sequences\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"stream\": false,\n        \"tools\": [\n          {\n            \"name\": \"<string>\",\n            \"input_schema\": \"<object>\",\n            \"description\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"input_schema\": \"<object>\",\n            \"description\": \"<string>\"\n          }\n        ],\n        \"tool_choice\": \"<object>\",\n        \"thinking\": {\n          \"type\": \"<string>\",\n          \"budget_tokens\": \"<integer>\"\n        },\n        \"service_tier\": \"<string>\",\n        \"metadata\": {\n          \"user_id\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "495ec278-08a8-4e15-b632-2df9ed6c3a3a",
+              "name": "The created Message Batch object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages",
+                    "batches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requests\": [\n    {\n      \"custom_id\": \"<string>\",\n      \"params\": {\n        \"model\": \"string\",\n        \"max_tokens\": 3718,\n        \"messages\": [\n          {\n            \"role\": \"assistant\",\n            \"content\": \"string\"\n          },\n          {\n            \"role\": \"user\",\n            \"content\": \"string\"\n          }\n        ],\n        \"system\": \"string\",\n        \"temperature\": 0.6221180930728925,\n        \"top_p\": 8944.300633359817,\n        \"top_k\": 5175,\n        \"stop_sequences\": [\n          \"string\",\n          \"string\"\n        ],\n        \"stream\": false,\n        \"tools\": [\n          {\n            \"name\": \"string\",\n            \"input_schema\": {},\n            \"description\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"input_schema\": {},\n            \"description\": \"string\"\n          }\n        ],\n        \"tool_choice\": {},\n        \"thinking\": {\n          \"type\": \"enabled\",\n          \"budget_tokens\": 4499\n        },\n        \"service_tier\": \"standard_only\",\n        \"metadata\": {\n          \"user_id\": \"string\"\n        }\n      }\n    },\n    {\n      \"custom_id\": \"<string>\",\n      \"params\": {\n        \"model\": \"string\",\n        \"max_tokens\": 1592,\n        \"messages\": [\n          {\n            \"role\": \"user\",\n            \"content\": \"string\"\n          },\n          {\n            \"role\": \"user\",\n            \"content\": \"string\"\n          }\n        ],\n        \"system\": \"string\",\n        \"temperature\": 0.336504938266622,\n        \"top_p\": 5530.17556361898,\n        \"top_k\": 8314,\n        \"stop_sequences\": [\n          \"string\",\n          \"string\"\n        ],\n        \"stream\": false,\n        \"tools\": [\n          {\n            \"name\": \"string\",\n            \"input_schema\": {},\n            \"description\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"input_schema\": {},\n            \"description\": \"string\"\n          }\n        ],\n        \"tool_choice\": {},\n        \"thinking\": {\n          \"type\": \"enabled\",\n          \"budget_tokens\": 2328\n        },\n        \"service_tier\": \"standard_only\",\n        \"metadata\": {\n          \"user_id\": \"string\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91cd9110-d079-4d9a-8010-179effdfe0a0",
+          "name": "Retrieve a Message Batch",
+          "request": {
+            "name": "Retrieve a Message Batch",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "messages",
+                "batches",
+                ":message_batch_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "message_batch_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version, e.g. `2023-06-01`.",
+                "key": "anthropic-version",
+                "value": "2023-06-01"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b8f2c6e-9aaf-41b3-bb47-9ab07a086528",
+              "name": "A Message Batch object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages",
+                    "batches",
+                    ":message_batch_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "message_batch_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c902b9ea-7582-4de0-8beb-8bf42db882e0",
+          "name": "Cancel a Message Batch",
+          "request": {
+            "name": "Cancel a Message Batch",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "messages",
+                "batches",
+                ":message_batch_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "message_batch_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version, e.g. `2023-06-01`.",
+                "key": "anthropic-version",
+                "value": "2023-06-01"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "57f53d69-8e04-4b22-8d87-fe5e7e8bb73a",
+              "name": "The Message Batch object with updated status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages",
+                    "batches",
+                    ":message_batch_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "message_batch_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf64bb9b-559d-43a4-867a-71b60ca5e21c",
+          "name": "Retrieve Message Batch results",
+          "request": {
+            "name": "Retrieve Message Batch results",
+            "description": {
+              "content": "Stream the JSONL results of an ended Message Batch.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "messages",
+                "batches",
+                ":message_batch_id",
+                "results"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "message_batch_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version, e.g. `2023-06-01`.",
+                "key": "anthropic-version",
+                "value": "2023-06-01"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-jsonlines"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b859bb0-db0f-495d-ae8e-9c9bb1b8d82d",
+              "name": "A stream of JSONL results, one per batched request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages",
+                    "batches",
+                    ":message_batch_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "message_batch_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-jsonlines"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-jsonlines"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.anthropic.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "72256043-7313-4880-b624-a431131b87df",
+    "name": "Anthropic Claude Messages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for sending messages to Claude models with support for streaming,\ntool use, vision, system prompts, prompt caching, and extended thinking.\nAuthentication uses an x-api-key header along with an anthropic-version header.\n\n\nContact Support:\n Name: Anthropic Support",
+      "type": "text/plain"
+    }
+  }
+}
