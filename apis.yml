@@ -8,7 +8,7 @@ description: >-
   Model Context Protocol, with authentication via x-api-key headers and a base
   URL at api.anthropic.com.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Artificial Intelligence
   - Large Language Models
