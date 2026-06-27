@@ -58,7 +58,7 @@ common:
     url: https://docs.anthropic.com/en/api/getting-started
   - type: Console
     url: https://console.anthropic.com
-  - type: SignUp
+  - type: Signup
     url: https://console.anthropic.com/login
   - type: Pricing
     url: https://www.anthropic.com/pricing
@@ -68,7 +68,7 @@ common:
     url: https://docs.anthropic.com/en/api/getting-started
   - type: RateLimits
     url: https://docs.anthropic.com/en/api/rate-limits
-  - type: Errors
+  - type: ErrorCodes
     url: https://docs.anthropic.com/en/api/errors
   - type: Versioning
     url: https://docs.anthropic.com/en/api/versioning
@@ -90,7 +90,7 @@ common:
     url: https://github.com/anthropics/anthropic-cookbook
   - type: Claude Code
     url: https://www.anthropic.com/claude-code
-  - type: Model Context Protocol
+  - type: ModelContextProtocol
     url: https://modelcontextprotocol.io
   - type: Blog
     url: https://www.anthropic.com/news

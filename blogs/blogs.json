@@ -3,16 +3,12 @@
   "feeds": [
     {
       "source": "https://www.anthropic.com/news",
-      "feed_url": "https://www.anthropic.com/news",
-      "title": "",
-      "saved": 0,
-      "method": "none"
-    },
-    {
-      "source": "https://modelcontextprotocol.io",
-      "error": "HTTPError"
+      "feed_url": "",
+      "saved": 1,
+      "method": "agent-scrape"
     }
   ],
-  "post_count": 4,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 6,
+  "fetched": "2026-06-27T12:23:40Z",
+  "agent_pulled": "2026-06-27"
 }
