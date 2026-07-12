@@ -50,6 +50,12 @@ apis:
       - type: GettingStarted
         url: https://docs.anthropic.com/en/api/getting-started
 common:
+  - type: VulnerabilityDisclosure
+    url: security/anthropic-claude-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/anthropic-claude-domain-security.yml
+  - type: Authentication
+    url: authentication/anthropic-claude-authentication.yml
   - type: Website
     url: https://www.anthropic.com
   - type: Documentation
