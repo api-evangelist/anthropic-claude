@@ -2,13 +2,14 @@
   "repo": "anthropic-claude",
   "feeds": [
     {
-      "source": "https://www.anthropic.com/news",
-      "feed_url": "",
-      "saved": 1,
-      "method": "agent-scrape"
+      "source": "https://modelcontextprotocol.io",
+      "feed_url": "https://modelcontextprotocol.io",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 6,
-  "fetched": "2026-06-27T12:23:40Z",
+  "post_count": 10,
+  "fetched": "2026-07-11T11:50:51Z",
   "agent_pulled": "2026-06-27"
 }
