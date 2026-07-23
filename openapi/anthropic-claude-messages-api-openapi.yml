@@ -1,0 +1,240 @@
+openapi: 3.1.0
+info:
+  title: Anthropic Claude Message Batches Messages API
+  version: '2023-06-01'
+  description: 'REST API for sending messages to Claude models with support for streaming,
+
+    tool use, vision, system prompts, prompt caching, and extended thinking.
+
+    Authentication uses an x-api-key header along with an anthropic-version header.
+
+    '
+  contact:
+    name: Anthropic Support
+    url: https://support.anthropic.com
+  license:
+    name: Anthropic Commercial Terms of Service
+    url: https://www.anthropic.com/legal/commercial-terms
+servers:
+- url: https://api.anthropic.com
+  description: Anthropic API production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Messages
+  description: Create messages with Claude models.
+paths:
+  /v1/messages:
+    post:
+      tags:
+      - Messages
+      summary: Create a Message
+      description: Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.
+      operationId: createMessage
+      parameters:
+      - $ref: '#/components/parameters/AnthropicVersion'
+      - $ref: '#/components/parameters/AnthropicBeta'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMessageRequest'
+      responses:
+        '200':
+          description: 'A Message object (or a stream of server-sent events if `stream: true`).'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+            text/event-stream:
+              schema:
+                type: string
+                description: Stream of message events when `stream` is true.
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  schemas:
+    CreateMessageRequest:
+      type: object
+      required:
+      - model
+      - max_tokens
+      - messages
+      properties:
+        model:
+          type: string
+          description: Model identifier, e.g. `claude-opus-4-5`, `claude-sonnet-4-5`, `claude-haiku-4-5`.
+        max_tokens:
+          type: integer
+          minimum: 1
+          description: Maximum number of tokens to generate before stopping.
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/InputMessage'
+        system:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: object
+        temperature:
+          type: number
+          minimum: 0
+          maximum: 1
+        top_p:
+          type: number
+        top_k:
+          type: integer
+        stop_sequences:
+          type: array
+          items:
+            type: string
+        stream:
+          type: boolean
+          default: false
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tool'
+        tool_choice:
+          type: object
+        thinking:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - enabled
+              - disabled
+            budget_tokens:
+              type: integer
+        service_tier:
+          type: string
+          enum:
+          - auto
+          - standard_only
+        metadata:
+          type: object
+          properties:
+            user_id:
+              type: string
+    InputMessage:
+      type: object
+      required:
+      - role
+      - content
+      properties:
+        role:
+          type: string
+          enum:
+          - user
+          - assistant
+        content:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: object
+    Tool:
+      type: object
+      required:
+      - name
+      - input_schema
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        input_schema:
+          type: object
+    Usage:
+      type: object
+      properties:
+        input_tokens:
+          type: integer
+        output_tokens:
+          type: integer
+        cache_creation_input_tokens:
+          type: integer
+        cache_read_input_tokens:
+          type: integer
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - message
+        role:
+          type: string
+          enum:
+          - assistant
+        model:
+          type: string
+        content:
+          type: array
+          items:
+            type: object
+        stop_reason:
+          type: string
+          enum:
+          - end_turn
+          - max_tokens
+          - stop_sequence
+          - tool_use
+          - pause_turn
+          - refusal
+        stop_sequence:
+          type: string
+          nullable: true
+        usage:
+          $ref: '#/components/schemas/Usage'
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+            message:
+              type: string
+  parameters:
+    AnthropicBeta:
+      name: anthropic-beta
+      in: header
+      required: false
+      description: Optional comma-separated list of beta feature flags.
+      schema:
+        type: string
+    AnthropicVersion:
+      name: anthropic-version
+      in: header
+      required: true
+      description: API version, e.g. `2023-06-01`.
+      schema:
+        type: string
+        default: '2023-06-01'
+  responses:
+    ErrorResponse:
+      description: An error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Anthropic API key. Send as the `x-api-key` header on every request.

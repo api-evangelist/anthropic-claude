@@ -1,0 +1,249 @@
+openapi: 3.1.0
+info:
+  title: Anthropic Claude Messages Message Batches API
+  version: '2023-06-01'
+  description: 'REST API for sending messages to Claude models with support for streaming,
+
+    tool use, vision, system prompts, prompt caching, and extended thinking.
+
+    Authentication uses an x-api-key header along with an anthropic-version header.
+
+    '
+  contact:
+    name: Anthropic Support
+    url: https://support.anthropic.com
+  license:
+    name: Anthropic Commercial Terms of Service
+    url: https://www.anthropic.com/legal/commercial-terms
+servers:
+- url: https://api.anthropic.com
+  description: Anthropic API production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Message Batches
+  description: Submit and manage asynchronous Message Batches.
+paths:
+  /v1/messages/batches:
+    get:
+      tags:
+      - Message Batches
+      summary: List Message Batches
+      description: List Message Batches in the workspace.
+      operationId: listMessageBatches
+      parameters:
+      - $ref: '#/components/parameters/AnthropicVersion'
+      - name: before_id
+        in: query
+        schema:
+          type: string
+      - name: after_id
+        in: query
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      responses:
+        '200':
+          description: A page of Message Batch objects.
+    post:
+      tags:
+      - Message Batches
+      summary: Create a Message Batch
+      description: Submit a batch of Messages requests for asynchronous processing.
+      operationId: createMessageBatch
+      parameters:
+      - $ref: '#/components/parameters/AnthropicVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - requests
+              properties:
+                requests:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - custom_id
+                    - params
+                    properties:
+                      custom_id:
+                        type: string
+                      params:
+                        $ref: '#/components/schemas/CreateMessageRequest'
+      responses:
+        '200':
+          description: The created Message Batch object.
+  /v1/messages/batches/{message_batch_id}:
+    get:
+      tags:
+      - Message Batches
+      summary: Retrieve a Message Batch
+      operationId: getMessageBatch
+      parameters:
+      - $ref: '#/components/parameters/AnthropicVersion'
+      - name: message_batch_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A Message Batch object.
+  /v1/messages/batches/{message_batch_id}/cancel:
+    post:
+      tags:
+      - Message Batches
+      summary: Cancel a Message Batch
+      operationId: cancelMessageBatch
+      parameters:
+      - $ref: '#/components/parameters/AnthropicVersion'
+      - name: message_batch_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The Message Batch object with updated status.
+  /v1/messages/batches/{message_batch_id}/results:
+    get:
+      tags:
+      - Message Batches
+      summary: Retrieve Message Batch results
+      description: Stream the JSONL results of an ended Message Batch.
+      operationId: getMessageBatchResults
+      parameters:
+      - $ref: '#/components/parameters/AnthropicVersion'
+      - name: message_batch_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A stream of JSONL results, one per batched request.
+          content:
+            application/x-jsonlines:
+              schema:
+                type: string
+components:
+  schemas:
+    CreateMessageRequest:
+      type: object
+      required:
+      - model
+      - max_tokens
+      - messages
+      properties:
+        model:
+          type: string
+          description: Model identifier, e.g. `claude-opus-4-5`, `claude-sonnet-4-5`, `claude-haiku-4-5`.
+        max_tokens:
+          type: integer
+          minimum: 1
+          description: Maximum number of tokens to generate before stopping.
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/InputMessage'
+        system:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: object
+        temperature:
+          type: number
+          minimum: 0
+          maximum: 1
+        top_p:
+          type: number
+        top_k:
+          type: integer
+        stop_sequences:
+          type: array
+          items:
+            type: string
+        stream:
+          type: boolean
+          default: false
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tool'
+        tool_choice:
+          type: object
+        thinking:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - enabled
+              - disabled
+            budget_tokens:
+              type: integer
+        service_tier:
+          type: string
+          enum:
+          - auto
+          - standard_only
+        metadata:
+          type: object
+          properties:
+            user_id:
+              type: string
+    Tool:
+      type: object
+      required:
+      - name
+      - input_schema
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        input_schema:
+          type: object
+    InputMessage:
+      type: object
+      required:
+      - role
+      - content
+      properties:
+        role:
+          type: string
+          enum:
+          - user
+          - assistant
+        content:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: object
+  parameters:
+    AnthropicVersion:
+      name: anthropic-version
+      in: header
+      required: true
+      description: API version, e.g. `2023-06-01`.
+      schema:
+        type: string
+        default: '2023-06-01'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Anthropic API key. Send as the `x-api-key` header on every request.
