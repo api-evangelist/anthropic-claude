@@ -8,7 +8,19 @@ description: >-
   Model Context Protocol, with authentication via x-api-key headers and a base
   URL at api.anthropic.com.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/anthropic-claude.png
 tags:
   - Artificial Intelligence
   - Large Language Models
@@ -23,32 +35,78 @@ created: '2026-05-11'
 modified: '2026-05-29'
 specificationVersion: '0.19'
 apis:
-  - aid: anthropic-claude:messages-api
-    name: Anthropic Claude Messages API
-    description: >-
-      REST API for sending messages to Claude models with support for streaming,
-      tool use, vision, system prompts, prompt caching, and extended thinking.
-      Authentication uses an x-api-key header with an anthropic-version header.
-    humanURL: https://docs.anthropic.com/en/api/messages
-    baseURL: https://api.anthropic.com
-    tags:
-      - Messages
-      - Chat
-      - Completions
-      - Tool Use
-      - Vision
-      - Streaming
-    properties:
-      - type: Documentation
-        url: https://docs.anthropic.com/en/api/messages
-      - type: APIReference
-        url: https://docs.anthropic.com/en/api/getting-started
-      - type: OpenAPI
-        url: openapi/anthropic-claude-openapi.yml
-      - type: AsyncAPI
-        url: asyncapi/anthropic-claude-asyncapi.yml
-      - type: GettingStarted
-        url: https://docs.anthropic.com/en/api/getting-started
+- aid: anthropic-claude:anthropic-claude-message-batches-api
+  name: Anthropic Claude Message Batches API
+  description: Submit and manage asynchronous Message Batches.
+  humanURL: https://docs.anthropic.com/en/api/messages
+  baseURL: https://api.anthropic.com
+  tags:
+  - Message Batches
+  properties:
+  - type: OpenAPI
+    url: openapi/anthropic-claude-message-batches-api-openapi.yml
+  - type: Documentation
+    url: https://docs.anthropic.com/en/api/messages
+  - type: APIReference
+    url: https://docs.anthropic.com/en/api/getting-started
+  - type: AsyncAPI
+    url: asyncapi/anthropic-claude-asyncapi.yml
+  - type: GettingStarted
+    url: https://docs.anthropic.com/en/api/getting-started
+- aid: anthropic-claude:anthropic-claude-messages-api
+  name: Anthropic Claude Messages API
+  description: Create messages with Claude models.
+  humanURL: https://docs.anthropic.com/en/api/messages
+  baseURL: https://api.anthropic.com
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/anthropic-claude-messages-api-openapi.yml
+  - type: Documentation
+    url: https://docs.anthropic.com/en/api/messages
+  - type: APIReference
+    url: https://docs.anthropic.com/en/api/getting-started
+  - type: AsyncAPI
+    url: asyncapi/anthropic-claude-asyncapi.yml
+  - type: GettingStarted
+    url: https://docs.anthropic.com/en/api/getting-started
+- aid: anthropic-claude:anthropic-claude-models-api
+  name: Anthropic Claude Models API
+  description: List and inspect available Claude models.
+  humanURL: https://docs.anthropic.com/en/api/messages
+  baseURL: https://api.anthropic.com
+  tags:
+  - Models
+  properties:
+  - type: OpenAPI
+    url: openapi/anthropic-claude-models-api-openapi.yml
+  - type: Documentation
+    url: https://docs.anthropic.com/en/api/messages
+  - type: APIReference
+    url: https://docs.anthropic.com/en/api/getting-started
+  - type: AsyncAPI
+    url: asyncapi/anthropic-claude-asyncapi.yml
+  - type: GettingStarted
+    url: https://docs.anthropic.com/en/api/getting-started
+- aid: anthropic-claude:anthropic-claude-token-counting-api
+  name: Anthropic Claude Token Counting API
+  description: Count tokens for a prospective Messages request.
+  humanURL: https://docs.anthropic.com/en/api/messages
+  baseURL: https://api.anthropic.com
+  tags:
+  - Token Counting
+  properties:
+  - type: OpenAPI
+    url: openapi/anthropic-claude-token-counting-api-openapi.yml
+  - type: Documentation
+    url: https://docs.anthropic.com/en/api/messages
+  - type: APIReference
+    url: https://docs.anthropic.com/en/api/getting-started
+  - type: AsyncAPI
+    url: asyncapi/anthropic-claude-asyncapi.yml
+  - type: GettingStarted
+    url: https://docs.anthropic.com/en/api/getting-started
 common:
   - type: AgenticAccess
     url: agentic-access/anthropic-claude-agentic-access.yml
