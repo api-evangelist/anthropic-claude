@@ -1,0 +1,20 @@
+{
+  "provider": "anthropic-claude",
+  "sources": [
+    "anthropic-claude-message-batches-api-openapi.yml",
+    "anthropic-claude-messages-api-openapi.yml",
+    "anthropic-claude-models-api-openapi.yml",
+    "anthropic-claude-token-counting-api-openapi.yml"
+  ],
+  "outputs": [
+    "anthropic-claude-message-batches-api-openapi.yml",
+    "anthropic-claude-messages-api-openapi.yml",
+    "anthropic-claude-models-api-openapi.yml",
+    "anthropic-claude-token-counting-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
