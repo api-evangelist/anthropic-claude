@@ -1,0 +1,589 @@
+{
+  "item": [
+    {
+      "id": "8e7150b6-d016-437b-bea8-7a60060e2827",
+      "name": "Message Batches",
+      "description": {
+        "content": "Submit and manage asynchronous Message Batches.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4f19aa33-15b7-403f-9852-47f8b7b508e4",
+          "name": "List Message Batches",
+          "request": {
+            "name": "List Message Batches",
+            "description": {
+              "content": "List Message Batches in the workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "messages",
+                "batches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "before_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "after_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version, e.g. `2023-06-01`.",
+                "key": "anthropic-version",
+                "value": "2023-06-01"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9015e050-bf6c-4194-97bc-ab06092b2a1c",
+              "name": "A page of Message Batch objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages",
+                    "batches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "before_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "572beb1f-e65d-425a-b842-1ba7d8c86b6b",
+          "name": "Create a Message Batch",
+          "request": {
+            "name": "Create a Message Batch",
+            "description": {
+              "content": "Submit a batch of Messages requests for asynchronous processing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "messages",
+                "batches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version, e.g. `2023-06-01`.",
+                "key": "anthropic-version",
+                "value": "2023-06-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requests\": [\n    {\n      \"custom_id\": \"<string>\",\n      \"params\": {\n        \"model\": \"<string>\",\n        \"max_tokens\": \"<integer>\",\n        \"messages\": [\n          {\n            \"role\": \"<string>\",\n            \"content\": \"<string>\"\n          },\n          {\n            \"role\": \"<string>\",\n            \"content\": \"<string>\"\n          }\n        ],\n        \"system\": \"<string>\",\n        \"temperature\": \"<number>\",\n        \"top_p\": \"<number>\",\n        \"top_k\": \"<integer>\",\n        \"stop_sequences\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"stream\": false,\n        \"tools\": [\n          {\n            \"name\": \"<string>\",\n            \"input_schema\": \"<object>\",\n            \"description\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"input_schema\": \"<object>\",\n            \"description\": \"<string>\"\n          }\n        ],\n        \"tool_choice\": \"<object>\",\n        \"thinking\": {\n          \"type\": \"<string>\",\n          \"budget_tokens\": \"<integer>\"\n        },\n        \"service_tier\": \"<string>\",\n        \"metadata\": {\n          \"user_id\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"custom_id\": \"<string>\",\n      \"params\": {\n        \"model\": \"<string>\",\n        \"max_tokens\": \"<integer>\",\n        \"messages\": [\n          {\n            \"role\": \"<string>\",\n            \"content\": \"<string>\"\n          },\n          {\n            \"role\": \"<string>\",\n            \"content\": \"<string>\"\n          }\n        ],\n        \"system\": \"<string>\",\n        \"temperature\": \"<number>\",\n        \"top_p\": \"<number>\",\n        \"top_k\": \"<integer>\",\n        \"stop_sequences\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"stream\": false,\n        \"tools\": [\n          {\n            \"name\": \"<string>\",\n            \"input_schema\": \"<object>\",\n            \"description\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"input_schema\": \"<object>\",\n            \"description\": \"<string>\"\n          }\n        ],\n        \"tool_choice\": \"<object>\",\n        \"thinking\": {\n          \"type\": \"<string>\",\n          \"budget_tokens\": \"<integer>\"\n        },\n        \"service_tier\": \"<string>\",\n        \"metadata\": {\n          \"user_id\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c352482f-55c0-4ddb-a1f1-fdd37858e497",
+              "name": "The created Message Batch object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages",
+                    "batches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requests\": [\n    {\n      \"custom_id\": \"<string>\",\n      \"params\": {\n        \"model\": \"string\",\n        \"max_tokens\": 1106,\n        \"messages\": [\n          {\n            \"role\": \"user\",\n            \"content\": \"string\"\n          },\n          {\n            \"role\": \"user\",\n            \"content\": \"string\"\n          }\n        ],\n        \"system\": \"string\",\n        \"temperature\": 0.36899886402030546,\n        \"top_p\": 965.7120153887588,\n        \"top_k\": 7883,\n        \"stop_sequences\": [\n          \"string\",\n          \"string\"\n        ],\n        \"stream\": false,\n        \"tools\": [\n          {\n            \"name\": \"string\",\n            \"input_schema\": {},\n            \"description\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"input_schema\": {},\n            \"description\": \"string\"\n          }\n        ],\n        \"tool_choice\": {},\n        \"thinking\": {\n          \"type\": \"enabled\",\n          \"budget_tokens\": 7525\n        },\n        \"service_tier\": \"standard_only\",\n        \"metadata\": {\n          \"user_id\": \"string\"\n        }\n      }\n    },\n    {\n      \"custom_id\": \"<string>\",\n      \"params\": {\n        \"model\": \"string\",\n        \"max_tokens\": 9687,\n        \"messages\": [\n          {\n            \"role\": \"user\",\n            \"content\": \"string\"\n          },\n          {\n            \"role\": \"user\",\n            \"content\": \"string\"\n          }\n        ],\n        \"system\": \"string\",\n        \"temperature\": 0.12627189125807492,\n        \"top_p\": 8762.943292502381,\n        \"top_k\": 2343,\n        \"stop_sequences\": [\n          \"string\",\n          \"string\"\n        ],\n        \"stream\": false,\n        \"tools\": [\n          {\n            \"name\": \"string\",\n            \"input_schema\": {},\n            \"description\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"input_schema\": {},\n            \"description\": \"string\"\n          }\n        ],\n        \"tool_choice\": {},\n        \"thinking\": {\n          \"type\": \"disabled\",\n          \"budget_tokens\": 3982\n        },\n        \"service_tier\": \"auto\",\n        \"metadata\": {\n          \"user_id\": \"string\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "177cb10a-b10b-4496-9e34-683e6bd08865",
+          "name": "Retrieve a Message Batch",
+          "request": {
+            "name": "Retrieve a Message Batch",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "messages",
+                "batches",
+                ":message_batch_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "message_batch_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version, e.g. `2023-06-01`.",
+                "key": "anthropic-version",
+                "value": "2023-06-01"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "55bed9e4-c727-446b-b772-61c111c69c50",
+              "name": "A Message Batch object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages",
+                    "batches",
+                    ":message_batch_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "message_batch_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b354c12e-94a9-4efa-804b-4d632cac7f79",
+          "name": "Cancel a Message Batch",
+          "request": {
+            "name": "Cancel a Message Batch",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "messages",
+                "batches",
+                ":message_batch_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "message_batch_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version, e.g. `2023-06-01`.",
+                "key": "anthropic-version",
+                "value": "2023-06-01"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dcf538bc-66ae-46e0-9cc6-28f6ba5acd1d",
+              "name": "The Message Batch object with updated status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages",
+                    "batches",
+                    ":message_batch_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "message_batch_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4873f13d-41b3-4030-b0e0-12f47db14aeb",
+          "name": "Retrieve Message Batch results",
+          "request": {
+            "name": "Retrieve Message Batch results",
+            "description": {
+              "content": "Stream the JSONL results of an ended Message Batch.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "messages",
+                "batches",
+                ":message_batch_id",
+                "results"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "message_batch_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version, e.g. `2023-06-01`.",
+                "key": "anthropic-version",
+                "value": "2023-06-01"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-jsonlines"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67448cd3-b525-4da5-8aa1-43ac363342cb",
+              "name": "A stream of JSONL results, one per batched request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages",
+                    "batches",
+                    ":message_batch_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "message_batch_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version, e.g. `2023-06-01`.",
+                    "key": "anthropic-version",
+                    "value": "2023-06-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-jsonlines"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-jsonlines"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.anthropic.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "74f317ba-1a69-46ac-8f77-bed85f301545",
+    "name": "Anthropic Claude Messages Message Batches API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for sending messages to Claude models with support for streaming,\ntool use, vision, system prompts, prompt caching, and extended thinking.\nAuthentication uses an x-api-key header along with an anthropic-version header.\n\n\nContact Support:\n Name: Anthropic Support",
+      "type": "text/plain"
+    }
+  }
+}

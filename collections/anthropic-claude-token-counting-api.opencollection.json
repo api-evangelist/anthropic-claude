@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Anthropic Claude Messages Message Batches Token Counting API",
+    "version": "2023-06-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Token Counting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Count tokens for a Messages request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.anthropic.com/v1/messages/count_tokens",
+            "headers": [
+              {
+                "name": "anthropic-version",
+                "value": ""
+              },
+              {
+                "name": "anthropic-beta",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Count the number of input tokens that a Messages request would consume, without actually creating a Message."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
