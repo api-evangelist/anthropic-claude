@@ -33,7 +33,7 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/anthropic-claude/refs/heads/main/apis.yml
 created: '2026-05-11'
 modified: '2026-05-29'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: anthropic-claude:anthropic-claude-message-batches-api
   name: Anthropic Claude Message Batches API
