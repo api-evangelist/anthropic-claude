@@ -59,6 +59,8 @@ apis:
   humanURL: https://docs.anthropic.com/en/api/messages
   baseURL: https://api.anthropic.com
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
