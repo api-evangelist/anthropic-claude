@@ -1,10 +1,7 @@
 {
   "provider": "anthropic-claude",
   "sources": [
-    "anthropic-claude-message-batches-api-openapi.yml",
-    "anthropic-claude-messages-api-openapi.yml",
-    "anthropic-claude-models-api-openapi.yml",
-    "anthropic-claude-token-counting-api-openapi.yml"
+    "_original/anthropic-claude-openapi.yml"
   ],
   "outputs": [
     "anthropic-claude-message-batches-api-openapi.yml",
@@ -15,6 +12,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "anthropic-claude-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "anthropic-claude-message-batches-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "anthropic-claude-messages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "anthropic-claude-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "anthropic-claude-token-counting-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

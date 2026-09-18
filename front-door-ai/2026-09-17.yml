@@ -1,0 +1,32 @@
+# Front Door AI Index — anthropic-claude — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: anthropic-claude
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.anthropic.com
+  final_host: www.anthropic.com
+  ownership: shared
+  owner: anthropic
+  shares_host_with:
+  - anthropic
+  - claude
+  inherited_from: null
+  verdict: scored
+  score: null
+  host_score: 21
+  density: null
+  words: 509
+  tiers:
+    agentic: 1
+    core: 11
+    model: 9
+  ambiguous: 2
+  top_terms:
+    AI: 11
+    Anthropic: 7
+    Claude: 2
+    agent: 1
+    agentic: 1
+    intelligence: 1
